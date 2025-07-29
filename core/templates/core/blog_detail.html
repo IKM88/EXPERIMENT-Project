@@ -1,0 +1,137 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ blog_post.title }} - Al-Solution Blog{% endblock %}
+
+{% block content %}
+<!-- Article Header Start -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog_list' %}">Blog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ blog_post.title|truncatechars:50 }}</li>
+                    </ol>
+                </nav>
+                
+                <article>
+                    <header class="mb-4">
+                        <h1 class="display-5 fw-bold mb-3">{{ blog_post.title }}</h1>
+                        <div class="d-flex align-items-center text-muted mb-4">
+                            <i class="bi bi-calendar me-2"></i>
+                            <span>Published on {{ blog_post.publication_date|date:"F d, Y" }}</span>
+                            <span class="mx-3">•</span>
+                            <i class="bi bi-clock me-2"></i>
+                            <span>{{ blog_post.content|wordcount }} words</span>
+                        </div>
+                    </header>
+                    
+                    {% if blog_post.image %}
+                        <div class="mb-5">
+                            <img src="{{ blog_post.image.url }}" 
+                                 class="img-fluid rounded shadow" 
+                                 alt="{{ blog_post.title }}"
+                                 style="width: 100%; height: 400px; object-fit: cover;">
+                        </div>
+                    {% endif %}
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Article Header End -->
+
+<!-- Article Content Start -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="article-content">
+                    {{ blog_post.content|linebreaks }}
+                </div>
+                
+                <!-- Article Footer -->
+                <div class="border-top pt-4 mt-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h6 class="mb-2">Share this article</h6>
+                            <div class="social-share">
+                                <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                                <a href="#" class="btn btn-outline-primary btn-sm me-2">
+                                    <i class="bi bi-twitter"></i> Twitter
+                                </a>
+                                <a href="#" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-envelope"></i> Email
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                            <a href="{% url 'blog_list' %}" class="btn btn-primary">
+                                <i class="bi bi-arrow-left me-2"></i>Back to Blog
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Article Content End -->
+
+<!-- Related Content Section Start -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h3 class="mb-4">Interested in AI Solutions?</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5 class="card-title mb-2">Ready to Transform Your Business?</h5>
+                                <p class="card-text text-muted mb-0">
+                                    Let's discuss how Al-Solution can help you implement AI strategies 
+                                    tailored to your specific business needs.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                <a href="{% url 'contact' %}" class="btn btn-primary">
+                                    <i class="bi bi-calendar-check me-2"></i>Schedule Consultation
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Related Content Section End -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add reading progress indicator
+    window.addEventListener('scroll', function() {
+        const article = document.querySelector('.article-content');
+        if (article) {
+            const articleTop = article.offsetTop;
+            const articleHeight = article.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollTop = window.pageYOffset;
+            
+            const progress = Math.max(0, Math.min(100, 
+                ((scrollTop - articleTop + windowHeight) / articleHeight) * 100
+            ));
+            
+            // You can use this progress value to show a reading progress bar
+            console.log('Reading progress:', Math.round(progress) + '%');
+        }
+    });
+</script>
+{% endblock %}

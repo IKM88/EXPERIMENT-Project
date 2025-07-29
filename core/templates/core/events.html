@@ -1,0 +1,176 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Events - Al-Solution{% endblock %}
+
+{% block content %}
+<!-- Page Header Start -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">AI Events & Webinars</h1>
+                <p class="lead">
+                    Join our expert-led sessions, workshops, and conferences to stay ahead 
+                    in the rapidly evolving world of artificial intelligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Header End -->
+
+<!-- Events Section Start -->
+<section class="section-padding">
+    <div class="container">
+        <!-- Upcoming Events -->
+        {% if upcoming_events %}
+            <div class="mb-5">
+                <h2 class="mb-4">
+                    <i class="bi bi-calendar-plus text-primary me-2"></i>Upcoming Events
+                </h2>
+                <div class="row g-4">
+                    {% for event in upcoming_events %}
+                        <div class="col-lg-6">
+                            <div class="card event-card h-100 card-hover">
+                                {% if event.image %}
+                                    <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}" style="height: 200px; object-fit: cover;">
+                                {% else %}
+                                    <img src="https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                                         class="card-img-top" alt="AI Event" style="height: 200px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <div class="event-badge mb-3">
+                                        <span class="badge bg-success">Upcoming</span>
+                                    </div>
+                                    <h5 class="card-title">{{ event.title }}</h5>
+                                    <p class="card-text flex-grow-1">{{ event.details|truncatewords:20 }}</p>
+                                    
+                                    <div class="event-meta mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-calendar text-primary me-2"></i>
+                                            <span>{{ event.event_date|date:"F d, Y" }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-clock text-primary me-2"></i>
+                                            <span>{{ event.event_date|date:"g:i A" }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-geo-alt text-primary me-2"></i>
+                                            <span>{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-auto">
+                                        <button class="btn btn-primary" onclick="registerForEvent('{{ event.title }}')">
+                                            <i class="bi bi-calendar-check me-2"></i>Register Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
+        <!-- Past Events -->
+        {% if past_events %}
+            <div class="mb-5">
+                <h2 class="mb-4">
+                    <i class="bi bi-calendar-check text-muted me-2"></i>Past Events
+                </h2>
+                <div class="row g-4">
+                    {% for event in past_events %}
+                        <div class="col-lg-6">
+                            <div class="card event-card h-100">
+                                {% if event.image %}
+                                    <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}" style="height: 200px; object-fit: cover; filter: grayscale(50%);">
+                                {% else %}
+                                    <img src="https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                                         class="card-img-top" alt="AI Event" style="height: 200px; object-fit: cover; filter: grayscale(50%);">
+                                {% endif %}
+                                <div class="card-body d-flex flex-column">
+                                    <div class="event-badge mb-3">
+                                        <span class="badge bg-secondary">Past Event</span>
+                                    </div>
+                                    <h5 class="card-title text-muted">{{ event.title }}</h5>
+                                    <p class="card-text flex-grow-1 text-muted">{{ event.details|truncatewords:20 }}</p>
+                                    
+                                    <div class="event-meta mb-3 text-muted">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-calendar me-2"></i>
+                                            <span>{{ event.event_date|date:"F d, Y" }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="bi bi-clock me-2"></i>
+                                            <span>{{ event.event_date|date:"g:i A" }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-geo-alt me-2"></i>
+                                            <span>{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
+        <!-- No Events State -->
+        {% if not upcoming_events and not past_events %}
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <i class="bi bi-calendar-x display-1 text-muted mb-4"></i>
+                            <h3 class="mb-3">No Events Scheduled</h3>
+                            <p class="text-muted mb-4">
+                                We're planning exciting AI events and webinars. 
+                                Stay tuned for announcements about upcoming sessions.
+                            </p>
+                            <a href="{% url 'contact' %}" class="btn btn-primary">
+                                <i class="bi bi-envelope me-2"></i>Get Notified
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+<!-- Events Section End -->
+
+<!-- Call to Action Section Start -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h3 class="mb-3">Want to Host an AI Event?</h3>
+                <p class="text-muted mb-4">
+                    Looking for expert speakers for your AI conference or workshop? 
+                    Our team is available for keynotes, panels, and technical sessions.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-microphone me-2"></i>Speaking Inquiries
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call to Action Section End -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function registerForEvent(eventTitle) {
+        // This would typically integrate with an event registration system
+        alert(`Registration for "${eventTitle}" is coming soon! Please contact us for more information.`);
+        
+        // Alternatively, redirect to contact form with pre-filled event information
+        // window.location.href = '{% url "contact" %}?event=' + encodeURIComponent(eventTitle);
+    }
+</script>
+{% endblock %}

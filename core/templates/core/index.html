@@ -1,0 +1,305 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Al-Solution - Leading AI Innovation Partner{% endblock %}
+
+{% block content %}
+<!-- Hero Section Start -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Transform Your Business with AI</h1>
+                <p class="lead mb-4">
+                    Al-Solution is your trusted partner in artificial intelligence innovation. 
+                    We help businesses leverage cutting-edge AI technology to drive growth, 
+                    efficiency, and competitive advantage.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-calendar-check me-2"></i>Schedule Demo
+                    </a>
+                    <button class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#testimonialModal">
+                        <i class="bi bi-star me-2"></i>Share Testimonial
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                     alt="AI Technology" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Services Section Start -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Our AI Solutions</h2>
+            <p class="lead text-muted">Comprehensive AI services tailored to your business needs</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-brain service-icon"></i>
+                        <h5 class="card-title">AI Consulting</h5>
+                        <p class="card-text">Strategic AI implementation guidance to transform your business processes and decision-making.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-graph-up service-icon"></i>
+                        <h5 class="card-title">Machine Learning</h5>
+                        <p class="card-text">Custom ML models and algorithms to automate processes and extract valuable insights from your data.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-bar-chart service-icon"></i>
+                        <h5 class="card-title">Data Analytics</h5>
+                        <p class="card-text">Advanced analytics solutions to turn your data into actionable business intelligence.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-gear service-icon"></i>
+                        <h5 class="card-title">AI Prototyping</h5>
+                        <p class="card-text">Rapid prototyping and proof-of-concept development to validate your AI ideas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+<!-- Latest Content Section Start -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Latest Blog Post -->
+            <div class="col-lg-6 mb-5">
+                <h3 class="mb-4">
+                    <i class="bi bi-journal-text text-primary me-2"></i>Latest Insights
+                </h3>
+                {% if latest_post %}
+                    <div class="card blog-card card-hover">
+                        {% if latest_post.image %}
+                            <img src="{{ latest_post.image.url }}" class="card-img-top" alt="{{ latest_post.title }}">
+                        {% else %}
+                            <img src="https://images.pexels.com/photos/3861458/pexels-photo-3861458.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                                 class="card-img-top" alt="AI Blog Post">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ latest_post.title }}</h5>
+                            <p class="card-text">{{ latest_post.content|truncatewords:20 }}</p>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar me-1"></i>{{ latest_post.publication_date|date:"M d, Y" }}
+                            </small>
+                            <div class="mt-3">
+                                <a href="{{ latest_post.get_absolute_url }}" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-journal-x display-4 text-muted mb-3"></i>
+                            <h5>No blog posts yet</h5>
+                            <p class="text-muted">Check back soon for the latest AI insights and industry updates.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Upcoming Event -->
+            <div class="col-lg-6 mb-5">
+                <h3 class="mb-4">
+                    <i class="bi bi-calendar-event text-primary me-2"></i>Upcoming Event
+                </h3>
+                {% if upcoming_event %}
+                    <div class="card event-card card-hover">
+                        {% if upcoming_event.image %}
+                            <img src="{{ upcoming_event.image.url }}" class="card-img-top" alt="{{ upcoming_event.title }}">
+                        {% else %}
+                            <img src="https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                                 class="card-img-top" alt="AI Event">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ upcoming_event.title }}</h5>
+                            <p class="card-text">{{ upcoming_event.details|truncatewords:15 }}</p>
+                            <div class="event-details">
+                                <small class="text-muted d-block">
+                                    <i class="bi bi-calendar me-1"></i>{{ upcoming_event.event_date|date:"M d, Y - g:i A" }}
+                                </small>
+                                <small class="text-muted d-block">
+                                    <i class="bi bi-geo-alt me-1"></i>{{ upcoming_event.location }}
+                                </small>
+                            </div>
+                            <div class="mt-3">
+                                <a href="{% url 'events' %}" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-calendar-x display-4 text-muted mb-3"></i>
+                            <h5>No upcoming events</h5>
+                            <p class="text-muted">Stay tuned for exciting webinars and AI conferences.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Latest Content Section End -->
+
+<!-- Testimonials Section Start -->
+{% if testimonials %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">What Our Clients Say</h2>
+            <p class="lead text-muted">Real feedback from businesses we've helped transform with AI</p>
+        </div>
+        
+        <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for testimonial in testimonials %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card testimonial-card text-center">
+                                    <div class="card-body p-5">
+                                        <div class="star-rating mb-3">
+                                            {% for i in testimonial.star_range %}
+                                                <i class="bi bi-star-fill"></i>
+                                            {% endfor %}
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter > testimonial.rating %}
+                                                    <i class="bi bi-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <blockquote class="blockquote">
+                                            <p class="mb-4">"{{ testimonial.comment }}"</p>
+                                        </blockquote>
+                                        <div class="blockquote-footer">
+                                            <strong>{{ testimonial.name }}</strong>
+                                            {% if testimonial.company %}
+                                                <br><small class="text-muted">{{ testimonial.company }}</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            {% if testimonials|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+<!-- Testimonials Section End -->
+
+<!-- Call to Action Section Start -->
+<section class="section-padding bg-primary text-white">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
+                <p class="lead mb-4">
+                    Join hundreds of companies already leveraging AI to drive innovation and growth. 
+                    Let's discuss how Al-Solution can help you achieve your goals.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                        <i class="bi bi-envelope me-2"></i>Get In Touch
+                    </a>
+                    <a href="{% url 'blog_list' %}" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-book me-2"></i>Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call to Action Section End -->
+
+<!-- Testimonial Modal Start -->
+<div class="modal fade" id="testimonialModal" tabindex="-1" aria-labelledby="testimonialModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="testimonialModalLabel">
+                    <i class="bi bi-star text-warning me-2"></i>Share Your Experience
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{% url 'submit_testimonial' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="id_name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_company" class="form-label">Company (Optional)</label>
+                        <input type="text" class="form-control" id="id_company" name="company">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_rating" class="form-label">Rating</label>
+                        <select class="form-select" id="id_rating" name="rating" required>
+                            <option value="">Select Rating</option>
+                            <option value="5">5 Stars - Excellent</option>
+                            <option value="4">4 Stars - Very Good</option>
+                            <option value="3">3 Stars - Good</option>
+                            <option value="2">2 Stars - Fair</option>
+                            <option value="1">1 Star - Poor</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_comment" class="form-label">Your Testimonial</label>
+                        <textarea class="form-control" id="id_comment" name="comment" rows="4" 
+                                  placeholder="Share your experience working with Al-Solution..." required></textarea>
+                    </div>
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Your testimonial will be reviewed before being published on our website.
+                    </small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send me-2"></i>Submit Testimonial
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Modal End -->
+
+{% endblock %}

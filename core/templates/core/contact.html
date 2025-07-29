@@ -1,0 +1,301 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Contact Us - Al-Solution{% endblock %}
+
+{% block content %}
+<!-- Page Header Start -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Get In Touch</h1>
+                <p class="lead">
+                    Ready to transform your business with AI? We'd love to hear from you. 
+                    Our team of experts is here to help you navigate the world of artificial intelligence.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page Header End -->
+
+<!-- Contact Section Start -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-envelope me-2"></i>Send Us a Message
+                        </h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="{{ form.name.id_for_label }}" class="form-label">
+                                        {{ form.name.label }} <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.name.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">
+                                        {{ form.email.label }} <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.email.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <label for="{{ form.company_name.id_for_label }}" class="form-label">
+                                        {{ form.company_name.label }}
+                                    </label>
+                                    {{ form.company_name }}
+                                    {% if form.company_name.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.company_name.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="{{ form.inquiry_type.id_for_label }}" class="form-label">
+                                        {{ form.inquiry_type.label }} <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.inquiry_type }}
+                                    {% if form.inquiry_type.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ form.inquiry_type.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3 mt-3">
+                                <label for="{{ form.message.id_for_label }}" class="form-label">
+                                    {{ form.message.label }} <span class="text-danger">*</span>
+                                </label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.message.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-send me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="col-lg-4">
+                <!-- Contact Details -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">
+                            <i class="bi bi-info-circle me-2"></i>Contact Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-envelope text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Email</h6>
+                                    <p class="text-muted mb-0">info@al-solution.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-phone text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Phone</h6>
+                                    <p class="text-muted mb-0">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-geo-alt text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Address</h6>
+                                    <p class="text-muted mb-0">
+                                        123 Tech Street<br>
+                                        AI Valley, CA 12345
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-clock text-primary me-3 mt-1"></i>
+                                <div>
+                                    <h6 class="mb-1">Business Hours</h6>
+                                    <p class="text-muted mb-0">
+                                        Mon - Fri: 9:00 AM - 6:00 PM<br>
+                                        Sat: 10:00 AM - 4:00 PM<br>
+                                        Sun: Closed
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Response Time -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0">
+                            <i class="bi bi-lightning me-2"></i>Quick Response
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2">
+                            <strong>Typical Response Time:</strong>
+                        </p>
+                        <ul class="list-unstyled mb-0">
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Email: Within 4 hours</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Phone: Same day callback</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Urgent matters: Within 1 hour</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Services Overview -->
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h6 class="mb-0">
+                            <i class="bi bi-gear me-2"></i>Our Services
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="service-list">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-brain text-primary me-2"></i>
+                                <span class="small">AI Strategy Consulting</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-graph-up text-primary me-2"></i>
+                                <span class="small">Machine Learning Solutions</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-bar-chart text-primary me-2"></i>
+                                <span class="small">Data Analytics</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-lightbulb text-primary me-2"></i>
+                                <span class="small">AI Prototyping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+<!-- FAQ Section Start -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                How quickly can you start an AI project?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We can typically begin initial consultations within 48 hours of contact. For full project initiation, 
+                                our timeline depends on project complexity, but most engagements start within 1-2 weeks.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                What industries do you specialize in?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We work across various industries including healthcare, finance, manufacturing, retail, and technology. 
+                                Our AI solutions are adaptable to meet the unique challenges of different sectors.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Do you offer ongoing support after project completion?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, we provide comprehensive ongoing support including system monitoring, updates, training, 
+                                and optimization services to ensure your AI solutions continue to deliver value over time.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FAQ Section End -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        
+        form.addEventListener('submit', function(e) {
+            submitBtn.innerHTML = '<i class="spinner-border spinner-border-sm me-2" role="status"></i>Sending...';
+            submitBtn.disabled = true;
+        });
+        
+        // Reset button if form has errors
+        if (document.querySelector('.text-danger')) {
+            submitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Send Message';
+            submitBtn.disabled = false;
+        }
+    });
+</script>
+{% endblock %}
